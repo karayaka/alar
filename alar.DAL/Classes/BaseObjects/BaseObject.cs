@@ -10,6 +10,13 @@ namespace alar.DAL.Classes.BaseObjects
 {
     public class BaseObject
     {
+        public BaseObject()
+        {
+            CreatedDate = DateTime.Now;
+            LastUpdateDate = DateTime.Now;
+            Status = Status.Active;
+            ObjectStatus = ObjectStatus.NonDeleted;
+        }
         [Key]
         public int ID { get; set; }
           
@@ -19,13 +26,15 @@ namespace alar.DAL.Classes.BaseObjects
         [Browsable(false)]
         [ScaffoldColumn(false)]
         //[ReadOnly(true)]
-        [DisplayName("Oluşturulma Tarihi")]       
+        [DisplayName("Oluşturulma Tarihi")]
+        [DataType(DataType.DateTime)]
         public DateTime CreatedDate { get; set; }
 
         [DisplayName("Oluşturan")]
         public int CreatedBy { get; set; }
 
         [DisplayName("Güncellenme Tarihi")]
+        [DataType(DataType.DateTime)]
         public DateTime LastUpdateDate { get; set; }
 
         [DisplayName("Son Güncelleyen")]
