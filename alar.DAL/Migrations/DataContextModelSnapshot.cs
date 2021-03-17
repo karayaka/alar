@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using NetTopologySuite.Geometries;
 using alar.DAL.AlarDataContext;
 
 namespace alar.DAL.Migrations
@@ -252,6 +253,9 @@ namespace alar.DAL.Migrations
 
                     b.Property<double>("Lat")
                         .HasColumnType("double");
+
+                    b.Property<Point>("Location")
+                        .HasColumnType("point");
 
                     b.Property<double>("Long")
                         .HasColumnType("double");

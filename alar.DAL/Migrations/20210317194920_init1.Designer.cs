@@ -4,13 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using NetTopologySuite.Geometries;
 using alar.DAL.AlarDataContext;
 
 namespace alar.DAL.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210317193025_iit1")]
-    partial class iit1
+    [Migration("20210317194920_init1")]
+    partial class init1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -254,6 +255,9 @@ namespace alar.DAL.Migrations
 
                     b.Property<double>("Lat")
                         .HasColumnType("double");
+
+                    b.Property<Point>("Location")
+                        .HasColumnType("point");
 
                     b.Property<double>("Long")
                         .HasColumnType("double");

@@ -35,7 +35,8 @@ namespace alar.WepApi
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddDbContextPool<DataContext>(
-                  options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")
+                  options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection"),
+                    x => x.UseNetTopologySuite()
             ));
             
 

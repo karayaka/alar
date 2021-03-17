@@ -1,6 +1,7 @@
 ﻿using alar.DAL.Classes.BaseObjects;
 using alar.DAL.Classes.CustomerClasses;
 using alar.DAL.Classes.DiscountClasses;
+using NetTopologySuite.Geometries;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -50,7 +51,7 @@ namespace alar.DAL.Classes.BranchClasses
         [Required(AllowEmptyStrings = false, ErrorMessage = "{0} Doldurulması Zorunludur")]
         public double Long { get; set; }
 
-        //public Point Location { get; set; }
+        public Point Location { get; set; }
 
         public ICollection<BranchAuthorized> BranchAuthorizeds { get; set; }
 

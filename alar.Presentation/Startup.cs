@@ -26,8 +26,7 @@ namespace alar.Presentation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContextPool<DataContext>(
-                  options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection")
-            ));
+                  options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection"),x=>x.UseNetTopologySuite()));
             services.AddControllersWithViews();
         }
 

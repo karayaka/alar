@@ -1,10 +1,11 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
+using NetTopologySuite.Geometries;
 
 namespace alar.DAL.Migrations
 {
-    public partial class iit1 : Migration
+    public partial class init1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -159,6 +160,7 @@ namespace alar.DAL.Migrations
                     PhoneNumber = table.Column<string>(nullable: true),
                     Lat = table.Column<double>(nullable: false),
                     Long = table.Column<double>(nullable: false),
+                    Location = table.Column<Point>(nullable: true),
                     CustomerID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
