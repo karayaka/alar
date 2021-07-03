@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using alar.BLL.Bussenes;
+using alar.BLL.Interfaces;
 using alar.DAL.AlarDataContext;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,6 +27,12 @@ namespace alar.Presentation
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
+
+            services.AddAutoMapper(typeof(Startup));
+
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+
             services.AddDbContextPool<DataContext>(
                   options => options.UseMySql(Configuration.GetConnectionString("DefaultConnection"),x=>x.UseNetTopologySuite()));
             services.AddControllersWithViews();

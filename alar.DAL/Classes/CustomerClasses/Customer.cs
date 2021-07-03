@@ -32,16 +32,19 @@ namespace alar.DAL.Classes.CustomerClasses
         [DisplayName("Vergi No")]
         public string TaxOffice { get; set; }
 
-        [DisplayName("Email")]
+        [DisplayName("Firma Email")]
         [DataType(DataType.EmailAddress, ErrorMessage = " Lütfen Geçerli Bir {0} Girin")]
         public string Email { get; set; }
 
-        [DisplayName("Telefon")]
+        [DisplayName("Firma Telefon")]
         [DataType(DataType.PhoneNumber, ErrorMessage = " Lütfen Geçerli Bir {0} Girin")]
         public string PhoneNumber { get; set; }
 
         [DisplayName("Firma Logo Min")]
         public string CustomerImageMin { get; set; }
+
+        [DisplayName("Firma Logo Orta")]
+        public string CustomerImageMedium { get; set; }
 
         [DisplayName("Firma Logo Large")]
         public string CustomerImageLarge { get; set; }

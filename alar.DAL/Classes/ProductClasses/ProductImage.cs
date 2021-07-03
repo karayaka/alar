@@ -20,10 +20,16 @@ namespace alar.DAL.Classes.ProductClasses
 
         [DisplayName("Resim Min")]
         public string ProductImageMin { get; set; }
+
         [DisplayName("Resim Large")]
         public string ProductImageLarge { get; set; }
+
         [DisplayName("Resim Orjinal")]
         public string ProductImageOrjin { get; set; }
+
+        [DisplayName("Firma Logo Orta")]
+        public string ProductImageMedium { get; set; }
+
         [DisplayName("Kapak Resmi")]
         public bool CoverImage { get; set; }
     }

@@ -51,6 +51,8 @@ namespace alar.DAL.Classes.UserClasses
 
         public string UserImageLarge { get; set; }
 
+        public string CustomerImageMedium { get; set; }
+
         public string UserImageOrjin { get; set; }
 
         [DisplayName("Firma")]

@@ -1,4 +1,5 @@
-﻿using alar.DAL.Classes.BaseObjects;
+﻿using alar.BLL.DataModels;
+using alar.DAL.Classes.BaseObjects;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -121,15 +122,16 @@ namespace alar.BLL.Interfaces
         /// <typeparam name="T"></typeparam>
         /// <param name="ID"></param>
         /// <returns></returns>
-        IQueryable<T> GetIQueryableByID<T>(int ID) where T : BaseObject;       
+        IQueryable<T> GetIQueryableByID<T>(int ID) where T : BaseObject;
 
         /// <summary>
         /// Dosya Kaydetme İşlemi Dosya Adı Dönüyor
         /// </summary>
         /// <param name="files"></param>
         /// <param name="folderName"></param>
+        /// <param name="path">KayıtOLacak Dosya Yolu</param>
         /// <returns></returns>
-        string SaveFile(List<IFormFile> files, string folderName);
+        string SaveFile(IFormFile file, string folderName, string path);
 
         /// <summary>
         /// Resim Defauld Boyutlama ile resim yükleme
@@ -137,6 +139,6 @@ namespace alar.BLL.Interfaces
         /// <param name="files"></param>
         /// <param name="folderName"></param>
         /// <returns></returns>
-        string SaveImage(List<IFormFile> files, string folderName);
+        ImageResultModel SaveImage(IFormFile file, string folderName,string path);
     }
 }

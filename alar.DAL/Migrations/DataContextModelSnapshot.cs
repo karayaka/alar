@@ -347,6 +347,9 @@ namespace alar.DAL.Migrations
                     b.Property<string>("CustomerImageLarge")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<string>("CustomerImageMedium")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("CustomerImageMin")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -831,6 +834,9 @@ namespace alar.DAL.Migrations
                     b.Property<string>("ProductImageLarge")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<string>("ProductImageMedium")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("ProductImageMin")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -939,6 +945,9 @@ namespace alar.DAL.Migrations
 
                     b.Property<int?>("CustomerID")
                         .HasColumnType("int");
+
+                    b.Property<string>("CustomerImageMedium")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<string>("Email")
                         .IsRequired()

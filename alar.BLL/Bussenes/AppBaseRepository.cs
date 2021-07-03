@@ -1,9 +1,12 @@
-﻿using alar.BLL.Interfaces;
+﻿using alar.BLL.DataModels;
+using alar.BLL.Interfaces;
 using alar.DAL.AlarDataContext;
 using alar.DAL.Classes.BaseObjects;
 using alar.DAL.Enums;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -226,15 +229,14 @@ namespace alar.BLL.Bussenes
         }
 
 
-        public string SaveFile(List<IFormFile> files, string folderName)
+        public string SaveFile(IFormFile file, string folderName,string path)
         {
             string fileName = null;
             try
-            {
-                var file = files[0];
-                var path = Path.Combine("Resource", folderName);
+            {               
+                var Imagepath = Path.Combine(path, folderName);
 
-                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), path);//TEstamaçlıYAzıldı
+                var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), Imagepath);//TEstamaçlıYAzıldı
                 if (file.Length > 0)
                 {
                     var fileKey = Guid.NewGuid();
@@ -254,11 +256,75 @@ namespace alar.BLL.Bussenes
             }
         }
 
-        public string SaveImage(List<IFormFile> files, string folderName)
+        public ImageResultModel SaveImage(IFormFile file, string folderName, string path)
         {
-            //Image Resize Yapılaca,
+            try
+            {
+                var retVal = new ImageResultModel();
 
-            throw new NotImplementedException();
+
+                using (var image = Image.Load(file.OpenReadStream()))
+                {
+                    string systemFileExtenstion = Path.GetExtension(file.FileName);
+                    //org
+                    var newfileNameorg = GenerateFileName("Photo_org_", systemFileExtenstion);
+                    var filepathorg = Path.Combine(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", folderName, "org")) + $@"\{newfileNameorg}";
+
+                    image.Save(filepathorg);
+                    retVal.ImageOrjin = newfileNameorg;
+
+                    //1080
+                    var ratioX18 = (double)1080 / image.Width;
+                    var ratioY18 = (double)640 / image.Height;
+                    var ratio18 = Math.Max(ratioX18, ratioY18);
+                    var width18 = (int)(image.Width * ratio18);
+                    var height18 = (int)(image.Height * ratio18);
+                    var newfileName18 = GenerateFileName("Photo_1080_", systemFileExtenstion);
+                    var filepath18 = Path.Combine(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", folderName, "px1080")) + $@"\{newfileName18}";
+                    image.Mutate(x => x.Resize(width18, height18, true));
+                    image.Save(filepath18);
+                    retVal.ImageLarge = newfileName18;
+
+                    //468px
+                    var ratioX40 = (double)468 / image.Width;
+                    var ratioY40 = (double)468 / image.Height;
+                    var ratio40 = Math.Max(ratioX40, ratioY40);
+                    var width40 = (int)(image.Width * ratio40);
+                    var height40 = (int)(image.Height * ratio40);
+                    image.Mutate(x => x.Resize(width40, height40));
+                    var newfileName40 = GenerateFileName("Photo_468_", systemFileExtenstion);
+                    var filepath40 = Path.Combine(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", folderName, "px468")) + $@"\{newfileName40}";
+                    image.Save(filepath40);
+                    retVal.ImageMedium = newfileName40;
+
+                    //200px
+                    var ratioX20 = (double)64 / image.Width;
+                    var ratioY20 = (double)64 / image.Height;
+                    var ratio20 = Math.Max(ratioX20, ratioY20);
+                    var width20 = (int)(image.Width * ratio20);
+                    var height20 = (int)(image.Height * ratio20);
+                    image.Mutate(x => x.Resize(width20, height20));
+                    var newfileName20 = GenerateFileName("Photo_200_", systemFileExtenstion);
+                    var filepath20 = Path.Combine(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", folderName,"px64")) + $@"\{newfileName20}";
+                    image.Save(filepath20);
+                    retVal.ImageMin = newfileName20;
+                    
+                }
+
+                return retVal;
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public string GenerateFileName(string fileTypeName, string fileextenstion)
+        {
+            if (fileTypeName == null) throw new ArgumentNullException(nameof(fileTypeName));
+            if (fileextenstion == null) throw new ArgumentNullException(nameof(fileextenstion));
+            return $"{fileTypeName}_{Guid.NewGuid():N}{fileextenstion}";
         }
 
         public async Task<T> Update<T>(T Entitiy) where T : BaseObject

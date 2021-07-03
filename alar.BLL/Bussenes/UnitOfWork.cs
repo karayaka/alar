@@ -20,9 +20,16 @@ namespace alar.BLL.Bussenes
 
         private IAppBaseRepositoriys _BaseRepositoriys;
 
+        private ISecurityRepository _SecurityRepository;
+
         public IAppBaseRepositoriys BaseRepositoriys
         {
             get => _BaseRepositoriys ?? (_BaseRepositoriys = new AppBaseRepository(context, httpContextAccessor));
+        }
+
+        public ISecurityRepository SecurityRepository 
+        {
+            get => _SecurityRepository ?? (_SecurityRepository = new SecurityRepository(context));
         }
 
         public async Task<int> SaveChangesAsync()

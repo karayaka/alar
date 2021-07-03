@@ -32,6 +32,8 @@ namespace alar.WepApi
 
             services.AddHttpContextAccessor();
 
+            services.AddAutoMapper(typeof(Startup));
+
             services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             services.AddDbContextPool<DataContext>(
@@ -54,7 +56,17 @@ namespace alar.WepApi
 
             app.UseRouting();
 
+            // global cors policy
+            app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials()); // allow credentials
+
+            app.UseAuthentication();
             app.UseAuthorization();
+
+            
 
             app.UseEndpoints(endpoints =>
             {

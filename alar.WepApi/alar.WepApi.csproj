@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.12">
       <PrivateAssets>all</PrivateAssets>
@@ -12,11 +13,20 @@
     </PackageReference>
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.2.4" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql.NetTopologySuite" Version="3.2.4" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.11.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\alar.BLL\alar.BLL.csproj" />
     <ProjectReference Include="..\alar.DAL\alar.DAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\UserImage\px468\" />
+    <Folder Include="wwwroot\UserImage\px64\" />
+    <Folder Include="wwwroot\UserImage\px1080\" />
+    <Folder Include="wwwroot\UserImage\org\" />
   </ItemGroup>
 
 

@@ -9,6 +9,8 @@ namespace alar.BLL.Interfaces
     {
         IAppBaseRepositoriys BaseRepositoriys { get; }
 
+        ISecurityRepository SecurityRepository { get; }
+
         Task<int> SaveChangesAsync();
     }
 }
